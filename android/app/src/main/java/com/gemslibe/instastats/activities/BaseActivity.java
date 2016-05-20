@@ -2,7 +2,6 @@ package com.gemslibe.instastats.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.gemslibe.instastats.AppComponent;
 import com.gemslibe.instastats.InstaStatApplication;
@@ -11,7 +10,7 @@ import com.gemslibe.instastats.R;
 /**
  * Created by kuzya on 20.05.2016.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends MvpAppCompatActivity {
     private boolean mIsRestarted;
 
     @Override

@@ -18,7 +18,7 @@ public class AppModel {
     private InstagramEngine mIgEngine;
 
     @Inject
-    public AppModel(InstagramEngine igEngine){
+    public AppModel(InstagramEngine igEngine) {
         mIgEngine = igEngine;
     }
 
@@ -28,10 +28,10 @@ public class AppModel {
 
     public void load() {
         _logger.debug("load");
-        try{
+        try {
             mIgEngine.getSession();
             mIsLoggedIn = true;
-        }catch (Exception e){
+        } catch (Exception e) {
             mIsLoggedIn = false;
         }
     }

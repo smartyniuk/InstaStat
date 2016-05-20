@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
 
 import com.gemslibe.instastats.R;
 import com.gemslibe.instastats.instagram.activities.InstagramAuthActivity;
