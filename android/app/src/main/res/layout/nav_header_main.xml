@@ -1,34 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="@dimen/nav_header_height"
-              android:background="@drawable/side_nav_bar"
-              android:gravity="bottom"
-              android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              android:theme="@style/ThemeOverlay.AppCompat.Dark">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon"/>
+    <data class="DrawerHeaderBinding">
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.gemslibe.instastats.model.UserModel"/>
+    </data>
 
-    <TextView
+    <com.gemslibe.instastats.ui.DrawerHeaderLayout
+        android:id="@+id/drawerHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:layout_height="@dimen/nav_header_height"
+        android:background="@drawable/side_nav_bar"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imgUserAvatar"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10dp"
+            android:src="@android:drawable/sym_def_app_icon"
+            app:imageUrl="@{viewModel.imageUrl}" />
+
+        <TextView
+            android:id="@+id/txtUserLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imgUserAvatar"
+            android:text="@{viewModel.userName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/txtMediaCountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtUserLogin"
+            android:layout_toEndOf="@id/imgUserAvatar"
+            android:text="posts:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtMediaCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtUserLogin"
+            android:text="@{viewModel.mediaCount.toString()}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/txtFollowsCountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMediaCountName"
+            android:layout_toEndOf="@id/imgUserAvatar"
+            android:text="follows:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtFollowsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtMediaCountName"
+            android:text="@{viewModel.followsCount.toString()}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtFollowedCountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtFollowsCountName"
+            android:layout_toEndOf="@id/imgUserAvatar"
+            android:text="followed:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtFollowedCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtFollowsCountName"
+            android:text="@{viewModel.followedCount.toString()}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"/>
+
+    </com.gemslibe.instastats.ui.DrawerHeaderLayout>
+</layout>

@@ -42,7 +42,6 @@ public class BaseActivity extends MvpAppCompatActivity {
     }
 
     protected void slideInRightPageTransition() {
-
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 

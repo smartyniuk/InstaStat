@@ -12,16 +12,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.gemslibe.instastats.R;
+import com.gemslibe.instastats.model.UserModel;
+import com.gemslibe.instastats.mvp.presenters.DrawerHeaderPresenter;
+import com.gemslibe.instastats.mvp.presenters.MainPresenter;
+import com.gemslibe.instastats.mvp.views.MainView;
+import com.gemslibe.instastats.ui.DrawerHeaderLayout;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MainView {
+
+    @InjectPresenter(type = PresenterType.GLOBAL, tag = DrawerHeaderPresenter.TAG)
+    DrawerHeaderPresenter mDrawerHeaderPresenter;
+    @InjectPresenter
+    MainPresenter mMainPresenter;
+
+//    @Bind(R.id.drawerHeader)
+    DrawerHeaderLayout mDrawerHeaderLayout;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -33,14 +58,16 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        drawer.openDrawer(GravityCompat.START);
+        mDrawerHeaderLayout = (DrawerHeaderLayout)navigationView.getHeaderView(0);
+        mDrawerHeaderPresenter.attachView(mDrawerHeaderLayout);
+        mDrawerHeaderPresenter.loadUserInfo();
     }
 
     @Override
@@ -98,5 +125,15 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void showProgress(boolean inProgress) {
+
+    }
+
+    @Override
+    public void setUserModel(UserModel userModel) {
+
     }
 }
